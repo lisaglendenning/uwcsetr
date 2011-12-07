@@ -1,0 +1,133 @@
+% Modified from:
+% https://www.ee.washington.edu/techsite/papers/templates/uweetr_latex.tar.gz
+%
+% Jeff Bilmes
+% bilmes@ee.washington.edu
+% Jan 1, 2001
+% $Header: /homes/bilmes/txt/uweetr/uweetr.sty,v 1.5 2001/03/02 04:40:41 bilmes Exp bilmes $
+
+\usepackage{fancyhdr}
+\usepackage{url}
+\usepackage{datetime}
+\usepackage{fullpage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Macros 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\UW}{University of Washington}
+\newcommand{\CSE}{Computer Science \& Engineering}
+\newcommand{\address}{Department of \CSE{}\\
+\UW{}\\
+Box 352350\\
+Seattle, Washington 98195-2350\\
+\url{http://www.cs.washington.edu}\\
+}
+
+\def\trcount#1{\def\@trcount{#1}}
+\def\trmonth#1{\def\@trmonth{#1}}
+\def\tryear#1{\def\@tryear{#1}}
+\def\@trcount{??}
+\def\@trmonth{??}
+\def\@tryear{??}
+
+\newcommand{\trfull}{UW-CSE-\@trnumber}
+\newcommand{\trtitle}{\UW{} Technical Report~\trfull{}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\makecover{
+    \titlepage  
+    \let\oldthanks=\thanks
+    \def\thanks##1{\relax}
+    \ifx\@empty\@tryear%
+        \def\@trnumber{\@trcount}
+    \else%
+        \date{\monthname[\@trmonth] 20\@tryear}%
+        \edef\@trnumber{\@tryear-\@trmonth-\@trcount}%
+    \fi
+    \shipout
+    \vbox to 9.4truein
+    {
+        \hsize=6.5truein\parindent=0.5truein
+    {
+
+    \hrule
+    \vbox to 1.0truein{\vfill}
+    \vbox to 0.25truein{\vfill}
+    \noindent\begin{minipage}[t]{\textwidth}
+    \LARGE\bf
+    \begin{center}
+    \@title
+    \end{center}
+    \end{minipage}
+
+    \vbox to 0.625truein{\vfill}
+
+    \noindent\begin{minipage}[t]{\textwidth}
+    \Large
+    \begin{center}
+    {\lineskip .75em\begin{tabular}[t]{c}\@author\end{tabular}\par}%
+    \end{center}
+    \end{minipage}
+
+    \vfill
+
+    \hrule
+
+    \vbox to 0.2truein{\vfil}
+    {
+    \centering
+    \begin{minipage}[t]{\textwidth}
+    \large\parindent=0pt
+    {\bf\largeheadfont \trtitle{}} \\
+    \@date \\
+    \vspace{1ex} \\
+    \address{} \\
+    \end{minipage}
+    }}
+    }
+} %makecover
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\@maketitle{%
+  \newpage
+  \null
+  \vskip 2em%
+  \begin{center}%
+  \let\thanks=\oldthanks
+    {\LARGE \@title \par}%
+    \vskip 1.5em%
+    {\large
+      \lineskip .5em%
+      \begin{tabular}[t]{c}%
+        \@author
+      \end{tabular}\par}%
+    \vskip 1em%
+    {\em \trtitle{}}%
+    \vskip .5em%
+    {\large \@date}%
+  \end{center}%
+  \par
+  \vskip 1.5em
+  \fancyhf{}
+  \rhead{\fancyplain{}{\textit{\leftmark}}}
+  \lfoot{\trfull{}}
+  \rfoot{\thepage}
+  \setcounter{page}{1}
+} %maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Formatting
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\font\smallheadfont=cmss9
+\font\largeheadfont=cmss17
+
+\pagestyle{fancyplain}
+\setlength{\headheight}{15pt}
+\setlength{\headsep}{18pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
